@@ -1,0 +1,150 @@
+<body>
+</body>
+
+<template name="ApplicationLayout">
+    <div class="container">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+              <a class="navbar-brand" href="#">My Finance</a>
+              <button class="navbar-toggler js-nav-button" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  {{>menu}}
+                </ul>
+              </div>
+            </nav>
+        </header>
+      <br><br><br><br><br><br>
+      <main role="main">
+        <div class="container">
+          {{> yield }}      
+        </div>   
+        </main>  
+    </div>
+</template>
+
+<template name="menu">
+    {{#if currentUser}}
+        <li class="nav-item">
+            <a class="nav-link" href="/stadistics">Stadistict</a>
+        </li>    
+    {{/if}}
+    <li class="nav-item">
+        <a class="nav-link" href="#">{{>loginButtons}}</a>
+    </li>
+</template>
+
+<template name="principalList">
+    {{#if currentUser}}
+        <div class="row">
+            <div class="col-md-12">{{> listListas}}</div>
+        </div>
+    {{/if}}
+</template>
+
+<template name="listListas">
+    {{#if currentUser}}
+        <div class="row">
+            <div class="col md-6">
+                <h3>List created</h3>
+                <ul>
+                    {{#each listas}}
+                        <li title="{{description}}" class="js-view-items">
+                            <a href="/list/{{ _id }}">{{title}}</a> -- {{ createdOn }}</li>
+                    {{/each}}    
+                </ul>
+            </div>
+            <div class="col md-6">
+                <h3>Create List</h3>
+                {{>ListForm}}        
+            </div>
+        </div>
+    {{/if}}    
+</template>
+
+<template name="ListForm">
+    {{> quickForm collection="Listas_db" id="insertListForm" type="method" meteormethod="insertList"}}
+</template>
+
+<template name="listItems">
+    {{#if currentUser}}
+
+        <div class="container row">
+            <div class="col-md-12"> 
+                {{>menunav}}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Items from list</h3>
+                
+                <div class="accordion" id="accordionExample">
+                {{#each item in items _id }}
+                    {{>showItem item}}
+                {{/each}}    
+                </div>
+            </div>
+            <div class="col-md-6">
+                {{>ItemForm}}    
+            </div>
+        </div>
+    {{/if}}    
+</template>
+
+<template name="menunav">
+    <ul class="nav justify-content-center">
+        <li class="nav-item"><a href="/" class="nav-link">Back</a></li>
+        <li class="nav-item"><a href="" class="nav-link">{{title}}</a></li>
+    </ul>
+</template>
+
+<template name="showItem">
+    <div class="card">
+        <div class="card-header" id="heading{{_id}}">
+            <h2 class="mb-0">
+                <button class="btn btn-link js-toggle-list" type="button" data-toggle="collapse" data-target="#collapse{{_id}}" aria-expanded="true" aria-controls="collapse{{_id}}">
+                {{name}}
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapse{{_id}}" class="collapse" aria-labelledby="heading{{_id}}" data-parent="#accordionExample">
+            <div class="card-body">
+                Amount: {{ amount }} <br>
+                Register Date: {{ registerOn }}
+            </div>
+        </div>
+    </div>
+
+        <p></p>
+</template>
+
+<template name="ItemForm">
+    <h3>Create item from list</h3>
+
+    {{#autoForm collection="Items_db"
+                id="insertItemsForm"
+                type="method"
+                meteormethod="insertItem"}}
+        <fieldset>
+        {{> afQuickField name='name'}}
+        {{> afQuickField name='amount'}}
+        {{> afQuickField name='registerOn'}}
+        <!-- the rest of the fields are hidden -->
+        {{> afQuickField name='listId' value=_id type="hidden"}}
+        {{> afQuickField name='createdBy' type="hidden"}}
+        {{> afQuickField name='createdOn' type="hidden"}}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Post!</button>
+    {{/autoForm}}
+</template>
+
+<template name="stadistics">
+    Here stay Stadistics
+</template>
