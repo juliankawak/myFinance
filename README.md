@@ -1,0 +1,2 @@
+# myFinance
+Meteor app --- Coursera
