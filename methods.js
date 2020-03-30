@@ -9,6 +9,18 @@ Meteor.methods({
             return Listas_db.insert(list);
         }    
     },
+    'updateList': function(list){
+        if (!Meteor.user()){
+            return;
+        }
+        else {
+            console.log('Updated')
+            console.log(list)
+            list.createdBy = Meteor.user().username;
+            list.createdOn  = new Date();
+            return Listas_db.update(list);
+        }    
+    },
     'insertItem': function (item) {
         if (!Meteor.user()){
             return;

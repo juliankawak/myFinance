@@ -55,7 +55,10 @@
                 <ul>
                     {{#each listas}}
                         <li title="{{description}}" class="js-view-items">
-                            <a href="/list/{{ _id }}">{{title}}</a> -- {{ createdOn }}</li>
+                            <a href="/list/{{ _id }}">{{title}}</a>
+                            <a href="/list/{{ _id }}/edit" class="btn btn-outline-warning btn-sm" title="Edit">E</a>
+                            <a href="" class="btn btn-outline-danger btn-sm" title="Delete">X</a>
+                        {{ createdOn }}</li>
                     {{/each}}    
                 </ul>
             </div>
@@ -69,6 +72,20 @@
 
 <template name="ListForm">
     {{> quickForm collection="Listas_db" id="insertListForm" type="method" meteormethod="insertList"}}
+</template>
+
+<template name="ListFormEdit">
+    <div class="container row">
+            <div class="col-md-12"> 
+                {{>menunav}}
+            </div>
+        </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12"> 
+        {{> quickForm collection="Listas_db" doc=this id="updateListForm" type="update" meteormethod="updateList"}}    
+        </div>
+    </div>
 </template>
 
 <template name="listItems">
@@ -118,6 +135,10 @@
             <div class="card-body">
                 Amount: {{ amount }} <br>
                 Register Date: {{ registerOn }}
+
+                <br><br>
+                <a href="" class="btn btn-outline-warning btn-sm" title="Edit">E</a>
+                <a href="" class="btn btn-outline-danger btn-sm" title="Delete">X</a>
             </div>
         </div>
     </div>

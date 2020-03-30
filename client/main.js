@@ -11,6 +11,13 @@ Template.listListas.helpers({
     }
 });
 
+Template.ListFormEdit.helpers({
+    listas:function(){
+        Meteor.subscribe("showList");
+        return Listas_db.find();
+    }
+});
+
 Template.listItems.helpers({
     items:function(listId){
         if (Meteor.user() && listId){
@@ -27,8 +34,6 @@ Template.listItems.events({
 
 Template.ApplicationLayout.events({
     'click .js-nav-button':function(parameter){
-        console.log(parameter)
-        console.log(parameter.currentTarget)
         $($(parameter.currentTarget).data('target')).toggle()
     }
 });

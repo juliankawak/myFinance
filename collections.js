@@ -12,6 +12,19 @@ Listas_db.attachSchema(new SimpleSchema({
         label: "Description",
         max: 1000
     },
+    firstDate: {
+        type: Date,
+        label: "Initial Date"
+    },
+    endDate:{
+        type: Date,
+        label: "End Date"
+    },
+    budget:{
+        type: Number,
+        label: "Amount",
+        min: 1
+    },
     createdBy: {
         type: String,
         autoform: {
@@ -35,6 +48,11 @@ Items_db.attachSchema(new SimpleSchema({
         type: String,
         label: "Name",
         max: 200
+    },
+    description: {
+        type: String,
+        label: "Description",
+        max: 1000
     },
     amount: {
         type: Number,
@@ -71,3 +89,10 @@ Items_db.attachSchema(new SimpleSchema({
     },
 
 }));
+
+
+Listas_db.allow({
+    update(userId, doc, fields, modifier) {
+        return doc.createdBy === userId;
+    }
+});

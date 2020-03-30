@@ -19,7 +19,17 @@ Router.route('/list/:_id', function () {
     this.render('listItems', {data:list});
 });
 
+Router.route('/list/:_id/edit', function () {
+    var listId = this.params._id;   
+
+    Meteor.subscribe('showList');
+    
+    listas = Listas_db.findOne({_id:listId});
+    this.render('ListFormEdit', {data:listas});
+});
+
 
 Router.route('/stadistics', function () {
     this.render('stadistics');
 });
+
