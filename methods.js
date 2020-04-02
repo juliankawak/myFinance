@@ -14,8 +14,6 @@ Meteor.methods({
             return;
         }
         else {
-            console.log('Updated')
-            console.log(list)
             list.createdBy = Meteor.user().username;
             list.createdOn  = new Date();
             return Listas_db.update(list);
@@ -29,6 +27,16 @@ Meteor.methods({
             item.createdBy = Meteor.user().username;
             item.createdOn  = new Date();
             return Items_db.insert(item);
+        }    
+    },
+    'updateItem': function(item){
+        if (!Meteor.user()){
+            return;
+        }
+        else {
+            item.createdBy = Meteor.user().username;
+            item.createdOn  = new Date();
+            return Items_db.update(item);
         }    
     }
 })

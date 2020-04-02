@@ -9,3 +9,10 @@ Meteor.publish("items.filtered", function(listId){
         return Items_db.find({ listId: listId });
     }
 });
+
+Meteor.publish("items.filtered.id", function(id){
+    if (this.userId){
+        return Items_db.find({ _id: id });
+    }
+});
+

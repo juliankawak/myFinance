@@ -28,6 +28,14 @@ Router.route('/list/:_id/edit', function () {
     this.render('ListFormEdit', {data:listas});
 });
 
+Router.route('/item/:_id/edit', function () {
+    var itemId = this.params._id;   
+
+    Meteor.subscribe('items.filtered.id');
+    
+    items = Items_db.findOne({_id:itemId});
+    this.render('ItemFormEdit', {data:items});
+});
 
 Router.route('/stadistics', function () {
     this.render('stadistics');

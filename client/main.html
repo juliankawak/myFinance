@@ -133,11 +133,12 @@
 
         <div id="collapse{{_id}}" class="collapse" aria-labelledby="heading{{_id}}" data-parent="#accordionExample">
             <div class="card-body">
+                Description: {{ description }}
                 Amount: {{ amount }} <br>
                 Register Date: {{ registerOn }}
 
                 <br><br>
-                <a href="" class="btn btn-outline-warning btn-sm" title="Edit">E</a>
+                <a href="/item/{{ _id }}/edit" class="btn btn-outline-warning btn-sm" title="Edit">E</a>
                 <a href="" class="btn btn-outline-danger btn-sm" title="Delete">X</a>
             </div>
         </div>
@@ -155,6 +156,7 @@
                 meteormethod="insertItem"}}
         <fieldset>
         {{> afQuickField name='name'}}
+        {{> afQuickField name='description'}}
         {{> afQuickField name='amount'}}
         {{> afQuickField name='registerOn'}}
         <!-- the rest of the fields are hidden -->
@@ -164,6 +166,20 @@
         </fieldset>
         <button type="submit" class="btn btn-primary">Post!</button>
     {{/autoForm}}
+</template>
+
+<template name="ItemFormEdit">
+    <div class="container row">
+            <div class="col-md-12"> 
+                {{>menunav}}
+            </div>
+        </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12"> 
+        {{> quickForm collection="Items_db" doc=this id="updateItemForm" type="update" meteormethod="updateItem"}}    
+        </div>
+    </div>
 </template>
 
 <template name="stadistics">

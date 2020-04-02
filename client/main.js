@@ -37,3 +37,10 @@ Template.ApplicationLayout.events({
         $($(parameter.currentTarget).data('target')).toggle()
     }
 });
+
+Template.showItem.helpers({
+    amount: function(amount){
+        console.log(amount)
+        return '$'+amount;    
+    }
+});
