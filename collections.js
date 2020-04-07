@@ -89,10 +89,3 @@ Items_db.attachSchema(new SimpleSchema({
     },
 
 }));
-
-
-Listas_db.allow({
-    update(userId, doc, fields, modifier) {
-        return doc.createdBy === userId;
-    }
-});
