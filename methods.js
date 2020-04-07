@@ -10,13 +10,14 @@ Meteor.methods({
         }    
     },
     'updateList': function(list){
+        console.log(list)
         if (!Meteor.user()){
             return;
         }
         else {
             list.createdBy = Meteor.user().username;
             list.createdOn  = new Date();
-            return Listas_db.update(list);
+            return Listas_db.update({ _id:list._id }, list);
         }    
     },
     'insertItem': function (item) {
@@ -36,22 +37,13 @@ Meteor.methods({
         else {
             item.createdBy = Meteor.user().username;
             item.createdOn  = new Date();
-            return Items_db.update(item);
+            return Items_db.update({ _id: item._id }, item);
         }    
+    },
+    'deleteList': function(id){
+        return Listas_db.remove({"_id":id});
+    },
+    'deleteItem': function(id){
+        return Items_db.remove({"_id":id});
     }
-})
-
-Meteor.methods({
-    'removeMessage':function(id){
-        if (!Meteor.user()){
-            return;
-        }
-        else {
-            var msg = Messages.findOne({_id:id});
-            if (msg.nickname == Meteor.user().username){
-                    Messages.remove({_id:id});
-                    return true;
-            }
-        }
-    }
-})
+});

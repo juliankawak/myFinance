@@ -56,8 +56,10 @@
                     {{#each listas}}
                         <li title="{{description}}" class="js-view-items">
                             <a href="/list/{{ _id }}">{{title}}</a>
-                            <a href="/list/{{ _id }}/edit" class="btn btn-outline-warning btn-sm" title="Edit">E</a>
-                            <a href="" class="btn btn-outline-danger btn-sm" title="Delete">X</a>
+                            <div class="btn-group" role="group">
+                                <a href="/list/{{ _id }}/edit" class="btn btn-outline-warning btn-sm" title="Edit">E</a>
+                                <a href="#" class="btn btn-outline-danger btn-sm js-delete-lista" title="Delete">X</a>
+                            </div>
                         {{ createdOn }}</li>
                     {{/each}}    
                 </ul>
@@ -138,8 +140,10 @@
                 Register Date: {{ registerOn }}
 
                 <br><br>
-                <a href="/item/{{ _id }}/edit" class="btn btn-outline-warning btn-sm" title="Edit">E</a>
-                <a href="" class="btn btn-outline-danger btn-sm" title="Delete">X</a>
+                <div class="btn-group" role="group">
+                    <a href="/item/{{ _id }}/edit" class="btn btn-outline-warning btn-sm" title="Edit">E</a>
+                    <a href="" class="btn btn-outline-danger btn-sm js-delete-item" title="Delete">X</a>
+                </div>
             </div>
         </div>
     </div>

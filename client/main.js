@@ -38,9 +38,9 @@ Template.ApplicationLayout.events({
     }
 });
 
-Template.showItem.helpers({
-    amount: function(amount){
-        console.log(amount)
-        return '$'+amount;    
+Template.listListas.events({
+    'click .js-delete-lista': function(event){
+        var id = this._id;
+        Listas_db.remove({"_id":id});
     }
 });
