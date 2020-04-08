@@ -46,45 +46,59 @@ Template.listListas.events({
 });
 
 
-Template.acTemplate.rendered = function() {
+var chart; //Pie
+var chart2; //Bars
 
-   
-};
+Template.stadistics.rendered = function(dasuper) {
 
+    var lista = this.data.list;
+    var data = this.data.items;
 
-Template.stadistics.helpers({
-    chart: function(list){
-
-        var chart;
-
-        var container = this.find("#container");
-
-        // Turn Meteor Collection to simple array of objects.
-        var data = Items_db.find({listId:list.listId});;
-
-        console.log(data)
-
-        var datos;
-        if(data.length > 0){
-            for (x in data) {        
-                console.log(data)
-                console.log(x)
-            }
+    //Pie
+    var container = this.find("#container");
+    
+    var datos = [];
+    if(data.length > 0){
+        for (x in data) {        
+            datos.push({x: data[x]['name'], value: data[x]['amount'] })
         }
-
-        //  ----- Standard Anychart API in use -----
-        chart = anychart.pie(data);
-        chart.title('ACME Corp. apparel sales through different retail channels');
-
-        chart.legend()
-          .position('bottom')
-          .itemsLayout('horizontal')
-          .align('center')
-          .title('Retail channels');
-
-        chart.animation(true);
-        chart.container(container).draw();    
-
-        return chart;
     }
-});
+    //  ----- Standard Anychart API in use -----
+    chart = anychart.pie(datos);
+    chart.title(lista.name);
+
+    chart.legend()
+      .position('bottom')
+      .itemsLayout('horizontal')
+      .align('center')
+      .title('Overview List');
+
+    chart.animation(true);
+    chart.container(container).draw();    
+
+
+    //Bar
+    var containerBar = this.find("#containerBar");
+    
+    var datosB = [];
+    if(data.length > 0){
+        for (x in data) {        
+            datosB.push([data[x]['name'], data[x]['amount']]);
+        }
+    }
+    //  ----- Standard Anychart API in use -----
+    chart = anychart.column(datosB);
+    chart.title(lista.name);
+
+    chart.legend()
+      .position('bottom')
+      .itemsLayout('horizontal')
+      .align('center')
+      .title('Overview List');
+
+    chart.animation(true);
+    chart.container(containerBar).draw();    
+
+
+
+};

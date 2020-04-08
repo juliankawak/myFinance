@@ -73,10 +73,15 @@
 
 <template name="ListFormEdit">
     <div class="container row">
-            <div class="col-md-12"> 
-                {{>menunav}}
-            </div>
+        <div class="col-md-12"> 
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit List</li>
+              </ol>
+            </nav>
         </div>
+    </div>
     <br>
     <div class="row">
         <div class="col-md-12"> 
@@ -87,11 +92,15 @@
 
 <template name="listItems">
     {{#if currentUser}}
-
         <div class="container row">
             <div class="col-md-12"> 
-                {{>menunav}}
-                <a href="/stadistics/{{ _id }}">Stadistics</a>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">List</li>
+                    <li class="breadcrumb-item"><a href="/stadistics/{{ _id }}">Stadistics</a></li>
+                  </ol>
+                </nav>
             </div>
         </div>
         <br>
@@ -182,21 +191,26 @@
     </div>
 </template>
 
-<template name="acTemplate">
-    <div id="container"></div>
-</template>
-
 <template name="stadistics">
     <div class="container row">
-            <div class="col-md-12"> 
-                {{>menunav}}
-            </div>
-        </div>
-    <br>
-    <div class="container row">
-        <!-- Graphics pie -->
         <div class="col-md-12"> 
-             {{> acTemplate items }}
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/list/{{ list._id }}">List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Stadistics</li>
+              </ol>
+            </nav>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <!-- Graphics pie -->
+        <div class="col-md-6"> 
+            <div id="container"></div>
+        </div>    
+        <div class="col-md-6"> 
+            <div id="containerBar"></div>
         </div>    
     </div>
 </template>
