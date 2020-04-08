@@ -37,7 +37,19 @@ Router.route('/item/:_id/edit', function () {
     this.render('ItemFormEdit', {data:items});
 });
 
-Router.route('/stadistics', function () {
-    this.render('stadistics');
+Router.route('/stadistics/:_id', function () {
+    var listId = this.params._id;   
+
+    Meteor.subscribe("items.filtered", listId);
+    
+    listas = Listas_db.findOne({_id:listId});
+    items = Items_db.find({listId:listId}).fetch();
+
+    var data = {
+        'list': listas,
+        'items': items
+    }
+
+    this.render('stadistics', {data: data});
 });
 

@@ -29,11 +29,6 @@
 </template>
 
 <template name="menu">
-    {{#if currentUser}}
-        <li class="nav-item">
-            <a class="nav-link" href="/stadistics">Stadistict</a>
-        </li>    
-    {{/if}}
     <li class="nav-item">
         <a class="nav-link" href="#">{{>loginButtons}}</a>
     </li>
@@ -96,6 +91,7 @@
         <div class="container row">
             <div class="col-md-12"> 
                 {{>menunav}}
+                <a href="/stadistics/{{ _id }}">Stadistics</a>
             </div>
         </div>
         <br>
@@ -186,6 +182,22 @@
     </div>
 </template>
 
-<template name="stadistics">
-    Here stay Stadistics
+<template name="acTemplate">
+    <div id="container"></div>
 </template>
+
+<template name="stadistics">
+    <div class="container row">
+            <div class="col-md-12"> 
+                {{>menunav}}
+            </div>
+        </div>
+    <br>
+    <div class="container row">
+        <!-- Graphics pie -->
+        <div class="col-md-12"> 
+             {{> acTemplate items }}
+        </div>    
+    </div>
+</template>
+
